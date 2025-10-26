@@ -1,0 +1,29 @@
+{
+  "name": "randomusercards",
+  "version": "1.0.0",
+  "description": "a react project to display random user info",
+  "scripts": {
+    "start": "npx parcel ./src/index.html",
+    "build": "npx parcel build ./src/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rougesocket/randomusercards.git"
+  },
+  "author": "Bhaskar Singh",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rougesocket/randomusercards/issues"
+  },
+  "homepage": "https://github.com/rougesocket/randomusercards#readme",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.16"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.0"
+  }
+}
