@@ -197,9 +197,16 @@ const cardData = {
     version: "1.4",
   },
 };
+
+const filterData = (data, txt) => {
+  return data.filter(
+    (ele) => ele?.name?.first.includes(txt) || ele?.name?.last.includes(txt)
+  );
+};
 const CardContainer = () => {
   const [userData, setUserData] = useState(null);
-
+  const [searchTxt, setSearchTxt] = useState("");
+  const [filterUserData, setFilterUserData] = useState(userData);
   useEffect(() => {
     loadUser();
   }, []);
@@ -208,6 +215,7 @@ const CardContainer = () => {
     const data = await fetch(API_END_POINT);
     const userCardData = await data.json();
     setUserData(userCardData?.results);
+    setFilterUserData(userCardData?.results);
   };
   if (userData === null)
     return (
@@ -230,8 +238,15 @@ const CardContainer = () => {
               placeholder="Enter a user"
               type="text"
               name="search"
+              onChange={(e) => setSearchTxt(e.target.value)}
             />
-            <button className="bg-gray-900 text-white py-1.5 pr-3 pl-1 font-bold text-base rounded-tr-md rounded-br-md">
+            <button
+              className="bg-gray-900 text-white py-1.5 pr-3 pl-1 font-bold text-base rounded-tr-md rounded-br-md"
+              onClick={() => {
+                const data = filterData(userData, searchTxt);
+                setFilterUserData(data);
+              }}
+            >
               Search
             </button>
           </div>
@@ -242,10 +257,39 @@ const CardContainer = () => {
           <span className="border-b-4 border-b-purple-800">User List</span>
         </h1>
         <div className="p-2 my-3">
+          {filterUserData?.length !== 0 &&
+          filterUserData?.length !== userData?.length ? (
+            <h1 className="ml-2 font-semibold">
+              Showing {filterUserData?.length} of {userData?.length}
+            </h1>
+          ) : (
+            ""
+          )}
           <div className="flex flex-wrap">
-            {userData.map((user) => (
-              <Card user={user} key={user?.id?.value}></Card>
-            ))}
+            {filterUserData && filterUserData.length > 0 ? (
+              filterUserData.map((user) => (
+                <Card user={user} key={user?.id?.value}></Card>
+              ))
+            ) : (
+              <>
+                <div className="w-full flex justify-center ">
+                  <div className="max-w-sm w-full border border-gray-400 rounded-lg p-6 shadow-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gray-400 text-white rounded-full">
+                        <i className="fas fa-user-times text-xl"></i>
+                      </div>
+                      <span className="text-xl font-semibold text-gray-800">
+                        User Not Found
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm text-gray-700">
+                      We couldn't locate the user you're searching for. Please
+                      try a different query and give it another go.
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
