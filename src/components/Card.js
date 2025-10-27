@@ -29,7 +29,9 @@ const Card = ({ user }) => {
           </div>
           <div className="flex-1 w-10 flex-wrap ml-2">
             <h1 className="font-semibold">birthday</h1>
-            <p className="truncate">5/1/1959</p>
+            <p className="truncate">
+              {new Date(user?.dob?.date).toLocaleDateString()}
+            </p>
           </div>
         </div>
         <div className="flex border border-purple-400 rounded-r-md my-4">

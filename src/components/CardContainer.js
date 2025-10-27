@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import Card from "./Card";
+import { API_END_POINT } from "./Constants";
+import Shimmer from "./Shimmer";
 
 const cardData = {
   results: [
@@ -195,6 +198,27 @@ const cardData = {
   },
 };
 const CardContainer = () => {
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    const data = await fetch(API_END_POINT);
+    const userCardData = await data.json();
+    setUserData(userCardData?.results);
+  };
+  if (userData === null)
+    return (
+      <div className="flex justify-center my-5 flex-wrap">
+        {Array(20)
+          .fill("")
+          .map((ele, idx) => (
+            <Shimmer key={idx} />
+          ))}
+      </div>
+    );
   return (
     <>
       <div className="bg-purple-600 h-48 text-white">
@@ -219,7 +243,7 @@ const CardContainer = () => {
         </h1>
         <div className="p-2 my-3">
           <div className="flex flex-wrap">
-            {cardData?.results.map((user) => (
+            {userData.map((user) => (
               <Card user={user} key={user?.id?.value}></Card>
             ))}
           </div>
