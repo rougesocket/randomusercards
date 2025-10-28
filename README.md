@@ -61,4 +61,7 @@ Make sure you have **Node.js** and **npm** (or **yarn**) installed on your machi
 
 ### Screenshot
 
-![alt text](image-1.png)
+Home Page
+![alt text](1.png)
+Profile Page
+![alt text](2.png)
