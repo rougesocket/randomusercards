@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router";
 import { IMAGE_BASE_URL } from "./Constants";
 
 const Card = ({ user }) => {
+  const navigate = useNavigate();
   return (
-    <div className="bg-white p-3 w-70 m-2 border border-purple-900 rounded-md">
+    <div
+      className="bg-white p-3 w-70 m-2 border border-purple-900 rounded-md cursor-pointer"
+      onClick={() => navigate("/profile", { state: { user } })}
+    >
       <div className="flex justify-center p-3">
         <img
           className="rounded-full h-24"
@@ -52,6 +57,11 @@ const Card = ({ user }) => {
             <p className="truncate">{user?.location?.country}</p>
           </div>
         </div>
+      </div>
+      <div>
+        <button className="bg-purple-600 p-2 w-full text-lg font-bold text-white">
+          Know More
+        </button>
       </div>
     </div>
   );

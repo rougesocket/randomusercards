@@ -219,13 +219,36 @@ const CardContainer = () => {
   };
   if (userData === null)
     return (
-      <div className="flex justify-center my-5 flex-wrap">
-        {Array(20)
-          .fill("")
-          .map((ele, idx) => (
-            <Shimmer key={idx} />
-          ))}
-      </div>
+      <>
+        <div className="bg-purple-600 h-48 text-white">
+          <div>
+            <h1 className="text-center text-4xl p-3">Random User Generator</h1>
+            <div className="flex justify-center items-center h-full mx-5 my-2">
+              <input
+                className="block min-w-0 grow bg-gray-100 border-gray-300 py-1.5 pr-3 pl-1 text-base text-gray-900 rounded-tl-md rounded-bl-md"
+                placeholder="Enter a user"
+                type="text"
+                name="search"
+              />
+              <button className="bg-gray-900 text-white py-1.5 pr-3 pl-1 font-bold text-base rounded-tr-md rounded-br-md">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="mx-5 my-5">
+          <h1 className="text-center font-bold text-2xl">
+            <span className="border-b-4 border-b-purple-800">User List</span>
+          </h1>
+          <div className="flex justify-center my-5 flex-wrap">
+            {Array(20)
+              .fill("")
+              .map((ele, idx) => (
+                <Shimmer key={idx} />
+              ))}
+          </div>
+        </div>
+      </>
     );
   return (
     <>
